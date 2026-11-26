@@ -1,10 +1,10 @@
 # atakemaltur.com
 
-Source for [atakemaltur.com](https://atakemaltur.com): security advisories, research write-ups and coordinated disclosure contact for Ata Kemal Tur (Error_33_6070).
+Source for [atakemaltur.com](https://atakemaltur.com): security advisories, research write-ups and coordinated disclosure contact, with my alias being Error_33_6070.
 
-## Reporting a security issue
+## Reporting a security issue or inquiry
 
-Please don't open a GitHub issue for security reports. See the [contact page](https://atakemaltur.com/contact/) or [`security.txt`](https://atakemaltur.com/.well-known/security.txt). Encrypted email is preferred.
+Please don't open a GitHub issue for security reports. See the [contact page](https://atakemaltur.com/contact/) or [`security.txt`](https://atakemaltur.com/.well-known/security.txt). Encrypted email or other forms of communication is preferred.
 
 ## Stack
 
@@ -12,13 +12,6 @@ Please don't open a GitHub issue for security reports. See the [contact page](ht
 - Content in Markdown (`src/content/advisories`, `src/content/research`)
 - Deployed to GitHub Pages via GitHub Actions
 
-## Local development
-
-```bash
-npm install
-npm run dev     # http://localhost:4321
-npm run build   # outputs to dist/
-```
 
 ## License
 
