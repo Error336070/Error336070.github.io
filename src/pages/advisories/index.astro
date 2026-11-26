@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import SeverityBadge from '../../components/SeverityBadge.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { getAdvisories, fmtDate, isoDate } from '../../lib/content';
+
+const advisories = await getAdvisories();
+---
+
+<Base title="Advisories" description="Coordinated vulnerability disclosures and security advisories.">
+  <h1>Advisories</h1>
+  <p class="lede">
+    Coordinated disclosures. Each entry is published only after the vendor has had a fair chance to fix the issue.
+    See the <a href="/disclosure-policy/">disclosure policy</a>.
+  </p>
+
+  {advisories.length === 0 ? (
+    <p class="empty">No public advisories yet.</p>
+  ) : (
+    <table class="adv-table">
+      <thead>
+        <tr><th>ID</th><th>Title</th><th>Severity</th><th>CVE</th><th>Status</th><th>Published</th></tr>
+      </thead>
+      <tbody>
+        {advisories.map((a) => (
+          <tr>
+            <td><code>{a.data.advisoryId}</code></td>
+            <td><a href={`/advisories/${a.id}/`}>{a.data.title}</a><div class="muted small">{a.data.vendor} · {a.data.product}</div></td>
+            <td><SeverityBadge severity={a.data.severity} /></td>
+            <td>{a.data.cve.length ? a.data.cve.map((c) => <code class="nowrap">{c}</code>) : <span class="muted">n/a</span>}</td>
+            <td><StatusBadge status={a.data.status} /></td>
+            <td><time datetime={isoDate(a.data.published)}>{fmtDate(a.data.published)}</time></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )}
+</Base>

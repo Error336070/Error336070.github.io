@@ -1,0 +1,14 @@
+---
+interface Props {
+  status: 'coordinating' | 'fixed' | 'published' | 'unfixed';
+}
+const { status } = Astro.props;
+const label = {
+  coordinating: 'Coordinating',
+  fixed: 'Fixed',
+  published: 'Published',
+  unfixed: 'Unfixed by vendor',
+}[status];
+---
+
+<span class={`badge status-${status}`}>{label}</span>

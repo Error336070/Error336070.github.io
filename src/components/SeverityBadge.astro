@@ -1,0 +1,8 @@
+---
+interface Props {
+  severity: 'critical' | 'high' | 'medium' | 'low' | 'info';
+}
+const { severity } = Astro.props;
+---
+
+<span class={`badge sev-${severity}`}>{severity}</span>

@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getResearch, fmtDate, isoDate } from '../../lib/content';
+
+const posts = await getResearch();
+---
+
+<Base title="Research" description="Reverse engineering and security research write-ups.">
+  <h1>Research</h1>
+  <p class="lede">Write-ups on reverse engineering, software protection and methodology.</p>
+
+  {posts.length === 0 ? (
+    <p class="empty">Write-ups coming soon.</p>
+  ) : (
+    <ul class="list">
+      {posts.map((r) => (
+        <li class="item">
+          <div class="item-meta">
+            <time datetime={isoDate(r.data.date)}>{fmtDate(r.data.date)}</time>
+            {r.data.tags.map((t) => <span class="tag">#{t}</span>)}
+          </div>
+          <a class="item-title" href={`/research/${r.id}/`}>{r.data.title}</a>
+          <p class="item-summary">{r.data.summary}</p>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>

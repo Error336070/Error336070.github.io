@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site.config';
+const days = SITE.disclosureWindowDays;
+---
+
+<Base title="Disclosure policy" description="How I report and publish security findings.">
+  <article class="prose">
+    <h1>Disclosure policy</h1>
+    <p class="lede">I practice coordinated vulnerability disclosure. The goal is to get issues fixed and to protect users.</p>
+
+    <h2>Process</h2>
+    <ol>
+      <li><strong>Private report.</strong> I contact the vendor through their security contact (or a general contact if none exists) with a clear description of the issue and its impact.</li>
+      <li><strong>Acknowledgment.</strong> I ask for an acknowledgment within 14 days.</li>
+      <li><strong>Fix window.</strong> The default embargo is <strong>{days} days</strong> from the initial report. If the vendor is actively working on a fix, I'm happy to extend it.</li>
+      <li><strong>Publication.</strong> After a fix ships or the window closes, I may publish an advisory. It describes the issue and its impact at a level that helps defenders, and never includes client-identifying information.</li>
+    </ol>
+
+    <h2>Coordinators</h2>
+    <p>
+      If a vendor doesn't respond, or if coordination breaks down, I may involve a neutral coordinator such as <a href="https://www.kb.cert.org/vuls/report/">CERT/CC</a> or <a href="https://www.usom.gov.tr/">USOM</a>.
+    </p>
+
+    <h2>What I don't do</h2>
+    <ul>
+      <li>Test systems or products outside an authorized scope.</li>
+      <li>Ask for payment as a condition of disclosure. Reports are provided unconditionally.</li>
+      <li>Publish working exploits for issues that haven't been fixed.</li>
+      <li>Share client data or client-specific findings with anyone but the client.</li>
+    </ul>
+
+    <h2>What I ask from vendors</h2>
+    <ul>
+      <li>Timely acknowledgment and a point of contact.</li>
+      <li>Credit in your advisory or release notes, if you publish one.</li>
+      <li>Good-faith engagement. Researchers acting under this policy are trying to help.</li>
+    </ul>
+  </article>
+</Base>

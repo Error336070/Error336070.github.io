@@ -1,0 +1,47 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SeverityBadge from '../../components/SeverityBadge.astro';
+import StatusBadge from '../../components/StatusBadge.astro';
+import { SITE } from '../../site.config';
+import { getAdvisories, fmtDate, isoDate } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const advisories = await getAdvisories();
+  return advisories.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const cweLink = (c: string) => `https://cwe.mitre.org/data/definitions/${c.replace(/\D/g, '')}.html`;
+const cveLink = (c: string) => `https://www.cve.org/CVERecord?id=${c}`;
+---
+
+<Base title={`${d.advisoryId}: ${d.title}`} description={d.summary}>
+  <article class="advisory">
+    <p class="eyebrow"><code>{d.advisoryId}</code></p>
+    <h1>{d.title}</h1>
+    <p class="lede">{d.summary}</p>
+
+    <dl class="facts">
+      <div><dt>Vendor</dt><dd>{d.vendor}</dd></div>
+      <div><dt>Product</dt><dd>{d.product}</dd></div>
+      <div><dt>Affected</dt><dd>{d.affected}</dd></div>
+      <div><dt>Fixed in</dt><dd>{d.fixed ?? <span class="muted">Not fixed</span>}</dd></div>
+      <div><dt>Severity</dt><dd><SeverityBadge severity={d.severity} /></dd></div>
+      <div><dt>Status</dt><dd><StatusBadge status={d.status} /></dd></div>
+      <div><dt>CVE</dt><dd>{d.cve.length ? d.cve.map((c) => <a href={cveLink(c)}><code>{c}</code></a>) : <span class="muted">n/a</span>}</dd></div>
+      <div><dt>CWE</dt><dd>{d.cwe.length ? d.cwe.map((c) => <a href={cweLink(c)}><code>{c}</code></a>) : <span class="muted">n/a</span>}</dd></div>
+      <div><dt>Reported</dt><dd><time datetime={isoDate(d.reported)}>{fmtDate(d.reported)}</time></dd></div>
+      <div><dt>Published</dt><dd><time datetime={isoDate(d.published)}>{fmtDate(d.published)}</time></dd></div>
+      {d.coordinator && <div><dt>Coordinator</dt><dd>{d.coordinator}{d.caseNumber && <> · <code>{d.caseNumber}</code></>}</dd></div>}
+      <div><dt>Vendor acknowledged</dt><dd>{d.vendorAcknowledged ? 'Yes' : 'No'}</dd></div>
+      <div><dt>Credit</dt><dd>{SITE.name} ({SITE.handle})</dd></div>
+    </dl>
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>

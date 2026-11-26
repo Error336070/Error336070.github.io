@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import { SITE, NAV } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · Security Research`;
+const path = Astro.url.pathname;
+const canonical = new URL(path, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.name} RSS`} href="/rss.xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <span class="brand-name">{SITE.name}</span>
+        </a>
+        <nav aria-label="Main">
+          {NAV.map((item) => (
+            <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <span>© {new Date().getFullYear()} {SITE.name} <span class="muted">({SITE.handle})</span></span>
+        <span class="footer-links">
+          <a href="/disclosure-policy/">Disclosure policy</a>
+          <a href="/pgp.asc">PGP key</a>
+          <a href="/.well-known/security.txt">security.txt</a>
+          <a href="/rss.xml">RSS</a>
+          <a href={SITE.github} rel="me">GitHub</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>

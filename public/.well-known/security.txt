@@ -1,0 +1,6 @@
+Contact: mailto:security@atakemaltur.com
+Expires: 2027-11-26T00:00:00.000Z
+Encryption: https://atakemaltur.com/pgp.asc
+Preferred-Languages: en, tr
+Canonical: https://atakemaltur.com/.well-known/security.txt
+Policy: https://atakemaltur.com/disclosure-policy/
