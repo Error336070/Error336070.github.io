@@ -1,70 +1,84 @@
 ---
 import Base from '../layouts/Base.astro';
-import SeverityBadge from '../components/SeverityBadge.astro';
-import StatusBadge from '../components/StatusBadge.astro';
-import { SITE } from '../site.config';
-import { getAdvisories, getResearch, fmtDate, isoDate } from '../lib/content';
+import AdvisoryCard from '../components/AdvisoryCard.astro';
+import ResearchCard from '../components/ResearchCard.astro';
+import { SITE, FIELDS, pgpGrouped } from '../site.config';
+import { getAdvisories, getResearch } from '../lib/content';
 
-const advisories = (await getAdvisories()).slice(0, 5);
-const research = (await getResearch()).slice(0, 5);
+const advisories = (await getAdvisories()).slice(0, 3);
+const research = (await getResearch()).slice(0, 4);
+const fieldLink = { security: 'Security research', quant: 'Quant research', ml: 'ML research' };
 ---
 
 <Base>
   <section class="hero">
-    <p class="eyebrow">{SITE.handle}</p>
-    <h1>{SITE.name}</h1>
-    <p class="lede">{SITE.tagline}</p>
-    <p class="hero-links">
-      <a class="btn" href="/advisories/">Advisories</a>
-      <a class="btn ghost" href="/contact/">Report a finding / get in touch</a>
-    </p>
+    <div class="hero-main">
+      <p class="eyebrow"><span class="handle">{SITE.handle}</span></p>
+      <h1><span class="hero-name">{SITE.name}</span> <span class="hero-tagline">{SITE.tagline}</span></h1>
+      <p class="lede">{SITE.intro}</p>
+      <p class="hero-actions">
+        <a class="btn" href="/advisories/">Read the advisories</a>
+        <a class="btn ghost" href="/services/">Work with me</a>
+      </p>
+    </div>
+    <dl class="hero-meta">
+      <div><dt>Contact</dt><dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
+      <div><dt>PGP</dt><dd><a class="fingerprint" href="/pgp.asc">{pgpGrouped}</a></dd></div>
+      <div><dt>Policy</dt><dd><a href="/disclosure-policy/">Coordinated disclosure, {SITE.disclosureWindowDays} days</a></dd></div>
+    </dl>
   </section>
 
-  <section>
+  <section class="section" aria-labelledby="areas">
     <div class="section-head">
-      <h2>Latest advisories</h2>
-      <a href="/advisories/">All advisories →</a>
+      <h2 id="areas"><span class="section-index" aria-hidden="true">01</span>Research areas</h2>
+    </div>
+    <div class="field-grid">
+      {FIELDS.map((f) => (
+        <article class={`field-card field-card-${f.id}`}>
+          <h3>{f.title}</h3>
+          <p>{f.blurb}</p>
+          <a class="arrow-link" href={`/research/field/${f.id}/`}>{fieldLink[f.id]}</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="advisories">
+    <div class="section-head">
+      <h2 id="advisories"><span class="section-index" aria-hidden="true">02</span>Latest advisories</h2>
+      <a class="arrow-link" href="/advisories/">All advisories</a>
     </div>
     {advisories.length === 0 ? (
-      <p class="empty">No public advisories yet. Disclosures appear here once the vendor fix window has closed.</p>
+      <p class="empty">No public advisories yet. An advisory appears here after the vendor has shipped a fix or the disclosure window has closed.</p>
     ) : (
-      <ul class="list">
-        {advisories.map((a) => (
-          <li class="item">
-            <div class="item-meta">
-              <code>{a.data.advisoryId}</code>
-              <SeverityBadge severity={a.data.severity} />
-              <StatusBadge status={a.data.status} />
-              <time datetime={isoDate(a.data.published)}>{fmtDate(a.data.published)}</time>
-            </div>
-            <a class="item-title" href={`/advisories/${a.id}/`}>{a.data.title}</a>
-            <p class="item-summary">{a.data.summary}</p>
-          </li>
-        ))}
-      </ul>
+      <div class="card-list">
+        {advisories.map((entry) => <AdvisoryCard entry={entry} />)}
+      </div>
     )}
   </section>
 
-  <section>
+  <section class="section" aria-labelledby="research">
     <div class="section-head">
-      <h2>Research &amp; write-ups</h2>
-      <a href="/research/">All research →</a>
+      <h2 id="research"><span class="section-index" aria-hidden="true">03</span>Research and write-ups</h2>
+      <a class="arrow-link" href="/research/">All research</a>
     </div>
     {research.length === 0 ? (
-      <p class="empty">Write-ups coming soon.</p>
+      <p class="empty">Nothing published yet. The first write-ups are in progress.</p>
     ) : (
-      <ul class="list">
-        {research.map((r) => (
-          <li class="item">
-            <div class="item-meta">
-              <time datetime={isoDate(r.data.date)}>{fmtDate(r.data.date)}</time>
-              {r.data.tags.map((t) => <span class="tag">#{t}</span>)}
-            </div>
-            <a class="item-title" href={`/research/${r.id}/`}>{r.data.title}</a>
-            <p class="item-summary">{r.data.summary}</p>
-          </li>
-        ))}
-      </ul>
+      <div class="card-list card-list-posts">
+        {research.map((entry) => <ResearchCard entry={entry} />)}
+      </div>
     )}
+  </section>
+
+  <section class="section cta" aria-labelledby="work">
+    <div class="cta-text">
+      <h2 id="work"><span class="section-index" aria-hidden="true">04</span>Work with me</h2>
+      <p>I take on software protection and licensing assessments, anti-tamper reviews and authorized penetration tests. Every engagement starts with a written scope and ends with a report you can act on.</p>
+    </div>
+    <p class="cta-actions">
+      <a class="btn" href="/services/">Services</a>
+      <a class="btn ghost" href="/contact/">Get in touch</a>
+    </p>
   </section>
 </Base>

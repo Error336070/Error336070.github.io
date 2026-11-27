@@ -1,26 +1,31 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../site.config';
+import { SITE, pgpGrouped } from '../site.config';
 ---
 
-<Base title="Contact">
+<Base title="Contact" description="Security reports, vendor coordination and assessment inquiries: email, PGP key and fingerprint.">
   <article class="prose">
-    <h1>Contact</h1>
-    <p class="lede">For security reports, vendor coordination and audit inquiries.</p>
+    <header class="page-head">
+      <p class="eyebrow">Contact</p>
+      <h1>Get in touch</h1>
+      <p class="lede">For security reports, vendor coordination and assessment inquiries.</p>
+    </header>
 
-    <dl class="facts">
+    <dl class="facts facts-2">
       <div><dt>Email</dt><dd><a href={`mailto:${SITE.email}`}>{SITE.email}</a></dd></div>
       <div><dt>PGP key</dt><dd><a href="/pgp.asc">/pgp.asc</a></dd></div>
-      <div><dt>Fingerprint</dt><dd><code class="fingerprint">{SITE.pgpFingerprint}</code></dd></div>
+      <div class="facts-wide"><dt>Fingerprint</dt><dd><span class="fingerprint">{pgpGrouped}</span></dd></div>
       <div><dt>GitHub</dt><dd><a href={SITE.github} rel="me">{SITE.github.replace('https://', '')}</a></dd></div>
       <div><dt>security.txt</dt><dd><a href="/.well-known/security.txt">/.well-known/security.txt</a></dd></div>
     </dl>
 
     <h2>Vendors</h2>
-    <p>
-      If you've received a report from me, please reply to the same thread. Encrypted email is preferred for
-      anything containing technical detail. My process and timelines are in the
-      <a href="/disclosure-policy/">disclosure policy</a>.
-    </p>
+    <p>If you've received a report from me, please reply to the same thread. Encrypted email is preferred for anything containing technical detail. My process and timelines are in the <a href="/disclosure-policy/">disclosure policy</a>.</p>
+
+    <h2>Assessment inquiries</h2>
+    <p>Tell me what the product is, what you want assessed and your timeline. I'll reply with scope questions, and with a quote once the scope is clear. The <a href="/services/">services page</a> explains how an engagement runs.</p>
+
+    <h2>Encrypted email</h2>
+    <p>My public key is at <a href="/pgp.asc">/pgp.asc</a>. Check it against the fingerprint above before you use it. If you don't use PGP, send a first message without technical detail and we'll agree on a channel.</p>
   </article>
 </Base>

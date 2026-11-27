@@ -26,12 +26,20 @@ const advisories = defineCollection({
   }),
 });
 
+// Keep in step with FIELDS in src/site.config.ts.
+const field = z.enum(['security', 'quant', 'ml']);
+
 const research = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/research' }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
     summary: z.string(),
+    // One field or several: `field: quant` or `field: [security, ml]`. Posts without it count as security.
+    field: z
+      .union([field, z.array(field).nonempty()])
+      .default('security')
+      .transform((v) => (Array.isArray(v) ? [...new Set(v)] : [v])),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),

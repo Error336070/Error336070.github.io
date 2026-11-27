@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import FieldTag from './FieldTag.astro';
+import { fmtDate, isoDate } from '../lib/content';
+
+interface Props {
+  entry: CollectionEntry<'research'>;
+  /** Heading level of the title, so the page outline stays in order. */
+  level?: 2 | 3;
+}
+const { entry, level = 3 } = Astro.props;
+const d = entry.data;
+const H = `h${level}` as 'h2' | 'h3';
+---
+
+<article class="post-card">
+  <p class="post-meta">
+    <time datetime={isoDate(d.date)}>{fmtDate(d.date)}</time>
+    <span class="fields">{d.field.map((f) => <FieldTag field={f} />)}</span>
+  </p>
+  <H class="card-title"><a href={`/research/${entry.id}/`}>{d.title}</a></H>
+  <p class="card-summary">{d.summary}</p>
+  {d.tags.length > 0 && <ul class="tags" aria-label="Topics">{d.tags.map((t) => <li>#{t}</li>)}</ul>}
+</article>

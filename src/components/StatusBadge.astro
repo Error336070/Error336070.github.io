@@ -11,4 +11,4 @@ const label = {
 }[status];
 ---
 
-<span class={`badge status-${status}`}>{label}</span>
+<span class={`badge status status-${status}`}><span class="sr-only">Status: </span><span class="dot" aria-hidden="true"></span><span class="badge-label">{label}</span></span>

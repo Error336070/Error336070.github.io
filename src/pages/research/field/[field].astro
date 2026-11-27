@@ -1,0 +1,21 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ResearchList from '../../../components/ResearchList.astro';
+import { FIELDS } from '../../../site.config';
+
+export function getStaticPaths() {
+  return FIELDS.map((f) => ({ params: { field: f.id }, props: { f } }));
+}
+
+const { f } = Astro.props;
+---
+
+<Base title={`${f.title} research`} description={f.blurb}>
+  <header class="page-head">
+    <p class="eyebrow">Research</p>
+    <h1>{f.title}</h1>
+    <p class="lede">{f.blurb}</p>
+  </header>
+
+  <ResearchList active={f.id} />
+</Base>

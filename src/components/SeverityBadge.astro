@@ -3,6 +3,8 @@ interface Props {
   severity: 'critical' | 'high' | 'medium' | 'low' | 'info';
 }
 const { severity } = Astro.props;
+const level = { critical: 4, high: 3, medium: 2, low: 1, info: 0 }[severity];
+const label = { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low', info: 'Info' }[severity];
 ---
 
-<span class={`badge sev-${severity}`}>{severity}</span>
+<span class={`badge sev sev-${severity}`}><span class="sr-only">Severity: </span><span class="meter" aria-hidden="true">{[1, 2, 3, 4].map((n) => <i class={n <= level ? 'on' : undefined}></i>)}</span><span class="badge-label">{label}</span></span>

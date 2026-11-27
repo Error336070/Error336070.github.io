@@ -3,12 +3,15 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { SITE } from './src/site.config.ts';
 
-// When you add a custom domain, change SITE.url in src/site.config.ts
-// and add public/CNAME containing just the domain (e.g. atakemaltur.com).
+// The domain lives in two places: SITE.url in src/site.config.ts and public/CNAME.
 export default defineConfig({
   site: SITE.url,
   integrations: [sitemap()],
   markdown: {
-    shikiConfig: { theme: 'github-dark-dimmed' },
+    // Code blocks carry both palettes as CSS variables; src/styles/global.css picks one per theme.
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark-dimmed' },
+      defaultColor: false,
+    },
   },
 });

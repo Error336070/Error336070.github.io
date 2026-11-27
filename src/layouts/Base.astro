@@ -1,15 +1,30 @@
 ---
 import '../styles/global.css';
-import { SITE, NAV } from '../site.config';
+import { SITE, NAV, FIELDS, pgpGrouped } from '../site.config';
+import { THEME } from '../theme';
 
 interface Props {
   title?: string;
   description?: string;
+  /** 'article' for advisories and write-ups. */
+  ogType?: 'website' | 'article';
 }
-const { title, description = SITE.description } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · Security Research`;
+const { title, description = SITE.description, ogType = 'website' } = Astro.props;
+const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.tagline.replace(/\.$/, '')}`;
 const path = Astro.url.pathname;
 const canonical = new URL(path, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  alternateName: SITE.handle,
+  url: SITE.url,
+  email: `mailto:${SITE.email}`,
+  sameAs: [SITE.github],
+  knowsAbout: FIELDS.map((f) => f.title),
+};
 ---
 
 <!doctype html>
@@ -17,32 +32,53 @@ const canonical = new URL(path, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Applies a stored theme choice before first paint. Without one, the system setting decides.
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={SITE.name} />
     <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content={THEME.dark} media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content={THEME.light} media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {THEME.preload.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
     <link rel="alternate" type="application/rss+xml" title={`${SITE.name} RSS`} href="/rss.xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap header-inner">
-        <a class="brand" href="/">
-          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+        <a class="brand" href="/" aria-label={`${SITE.name}, home`}>
+          <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">{SITE.name}</span>
         </a>
-        <nav aria-label="Main">
+        <nav class="site-nav" aria-label="Main">
           {NAV.map((item) => (
-            <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
-              {item.label}
-            </a>
+            <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
           ))}
         </nav>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch between dark and light theme" hidden>
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+            <circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+            <path d="M10 2.75a7.25 7.25 0 0 1 0 14.5z" fill="currentColor"></path>
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -52,15 +88,36 @@ const canonical = new URL(path, Astro.site);
 
     <footer class="site-footer">
       <div class="wrap footer-inner">
-        <span>© {new Date().getFullYear()} {SITE.name} <span class="muted">({SITE.handle})</span></span>
-        <span class="footer-links">
+        <p class="footer-id">
+          <span class="footer-name">© {new Date().getFullYear()} {SITE.name}</span>
+          <span class="footer-handle">{SITE.handle}</span>
+        </p>
+        <nav class="footer-links" aria-label="Footer">
           <a href="/disclosure-policy/">Disclosure policy</a>
+          <a href="/services/">Services</a>
           <a href="/pgp.asc">PGP key</a>
           <a href="/.well-known/security.txt">security.txt</a>
           <a href="/rss.xml">RSS</a>
           <a href={SITE.github} rel="me">GitHub</a>
-        </span>
+        </nav>
+        <p class="footer-pgp"><span class="label">PGP</span> <span class="fingerprint">{pgpGrouped}</span></p>
       </div>
     </footer>
+    <script is:inline>
+      (function () {
+        var b = document.getElementById('theme-toggle');
+        if (!b) return;
+        b.hidden = false;
+        b.addEventListener('click', function () {
+          var root = document.documentElement;
+          var now = root.dataset.theme || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+          var next = now === 'dark' ? 'light' : 'dark';
+          root.dataset.theme = next;
+          try {
+            localStorage.setItem('theme', next);
+          } catch (e) {}
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -1,0 +1,32 @@
+---
+import ResearchCard from './ResearchCard.astro';
+import { FIELDS, type FieldId } from '../site.config';
+import { getResearch } from '../lib/content';
+
+interface Props {
+  /** The field this page lists. Leave out for the full feed. */
+  active?: FieldId;
+}
+const { active } = Astro.props;
+const all = await getResearch();
+const posts = active ? all.filter((p) => p.data.field.includes(active)) : all;
+const count = (id: FieldId) => all.filter((p) => p.data.field.includes(id)).length;
+const emptyText = active
+  ? 'Nothing published in this field yet.'
+  : 'Nothing published yet. The first write-ups are in progress.';
+---
+
+<nav class="filter" aria-label="Filter research by field">
+  <a href="/research/" aria-current={active ? undefined : 'page'}>All <span class="count">{all.length}</span></a>
+  {FIELDS.map((f) => (
+    <a class={`filter-${f.id}`} href={`/research/field/${f.id}/`} aria-current={active === f.id ? 'page' : undefined}>{f.label} <span class="count">{count(f.id)}</span></a>
+  ))}
+</nav>
+
+{posts.length === 0 ? (
+  <p class="empty">{emptyText}</p>
+) : (
+  <div class="card-list">
+    {posts.map((entry) => <ResearchCard entry={entry} level={2} />)}
+  </div>
+)}

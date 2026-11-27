@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Services" description="Software protection and licensing assessments, anti-tamper reviews and authorized penetration testing.">
+  <article class="prose services">
+    <header class="page-head">
+      <p class="eyebrow">Services</p>
+      <h1>Work with me</h1>
+      <p class="lede">Authorized security assessments for software vendors. I look at your product the way a capable attacker would, and tell you what holds, what breaks and what to change.</p>
+    </header>
+
+    <h2>What I offer</h2>
+    <div class="offer-grid">
+      <section class="offer">
+        <h3>Software protection and licensing assessments</h3>
+        <p>How your licensing, activation and protection hold up against a skilled reverse engineer: what can be bypassed, how much effort it takes, and which changes raise that effort the most.</p>
+      </section>
+      <section class="offer">
+        <h3>Anti-tamper reviews</h3>
+        <p>A review of obfuscation, code virtualization, integrity checks and anti-debugging, whether you built them yourself or bought them from a protection vendor.</p>
+      </section>
+      <section class="offer">
+        <h3>Authorized penetration testing</h3>
+        <p>Scoped testing of applications and the systems behind them, such as licence servers, update channels and web applications.</p>
+      </section>
+    </div>
+
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><strong>Scope and authorization.</strong> We agree a written scope and you give written authorization. Nothing is tested before both exist.</li>
+      <li><strong>Assessment.</strong> I test within the scope and keep a record of what was done, so every finding can be reproduced.</li>
+      <li><strong>Report.</strong> You get a findings report: each issue ranked by severity, with evidence and remediation guidance.</li>
+      <li><strong>Retest (optional).</strong> After you ship fixes, I check them against the original findings.</li>
+    </ol>
+
+    <h2>Confidentiality</h2>
+    <ul>
+      <li>Findings belong to you.</li>
+      <li>An NDA is available on request.</li>
+      <li>No client details are ever published: no names, products, samples or figures.</li>
+      <li>If an assessment turns up a flaw in a third-party product you rely on, I report it to that vendor through <a href="/disclosure-policy/">coordinated disclosure</a>, only with your sign-off and with nothing that identifies you.</li>
+    </ul>
+
+    <h2>What I don't take on</h2>
+    <ul>
+      <li>Testing a product without written authorization from its owner.</li>
+      <li>Selling bypasses, cracks or tools for defeating a product's protection.</li>
+    </ul>
+
+    <h2>Pricing</h2>
+    <p>Pricing depends on the scope. Tell me what you need and I'll send a quote.</p>
+
+    <section class="cta" aria-labelledby="start">
+      <div class="cta-text">
+        <h2 id="start">Start a conversation</h2>
+        <p>Send a short note with what the product is, what you want assessed and your timeline.</p>
+      </div>
+      <p class="cta-actions"><a class="btn" href="/contact/">Get in touch</a></p>
+    </section>
+  </article>
+</Base>

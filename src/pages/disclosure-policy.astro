@@ -2,25 +2,33 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site.config';
 const days = SITE.disclosureWindowDays;
+const ack = SITE.acknowledgmentDays;
 ---
 
 <Base title="Disclosure policy" description="How I report and publish security findings.">
   <article class="prose">
-    <h1>Disclosure policy</h1>
-    <p class="lede">I practice coordinated vulnerability disclosure. The goal is to get issues fixed and to protect users.</p>
+    <header class="page-head">
+      <p class="eyebrow">Policy</p>
+      <h1>Disclosure policy</h1>
+      <p class="lede">I practice coordinated vulnerability disclosure. The goal is to get issues fixed and to protect users.</p>
+    </header>
+
+    <ol class="glance" aria-label="The default timeline">
+      <li><span class="glance-day">Day 0</span><span class="glance-what">Private report to the vendor</span></li>
+      <li><span class="glance-day">Day {ack}</span><span class="glance-what">Acknowledgment requested by</span></li>
+      <li><span class="glance-day">Day {days}</span><span class="glance-what">Default publication date</span></li>
+    </ol>
 
     <h2>Process</h2>
     <ol>
       <li><strong>Private report.</strong> I contact the vendor through their security contact (or a general contact if none exists) with a clear description of the issue and its impact.</li>
-      <li><strong>Acknowledgment.</strong> I ask for an acknowledgment within 14 days.</li>
+      <li><strong>Acknowledgment.</strong> I ask for an acknowledgment within {ack} days.</li>
       <li><strong>Fix window.</strong> The default embargo is <strong>{days} days</strong> from the initial report. If the vendor is actively working on a fix, I'm happy to extend it.</li>
       <li><strong>Publication.</strong> After a fix ships or the window closes, I may publish an advisory. It describes the issue and its impact at a level that helps defenders, and never includes client-identifying information.</li>
     </ol>
 
     <h2>Coordinators</h2>
-    <p>
-      If a vendor doesn't respond, or if coordination breaks down, I may involve a neutral coordinator such as <a href="https://www.kb.cert.org/vuls/report/">CERT/CC</a> or <a href="https://www.usom.gov.tr/">USOM</a>.
-    </p>
+    <p>If a vendor doesn't respond, or if coordination breaks down, I may involve a neutral coordinator such as <a href="https://www.kb.cert.org/vuls/report/">CERT/CC</a> or <a href="https://www.usom.gov.tr/">USOM</a>.</p>
 
     <h2>What I don't do</h2>
     <ul>
@@ -36,5 +44,8 @@ const days = SITE.disclosureWindowDays;
       <li>Credit in your advisory or release notes, if you publish one.</li>
       <li>Good-faith engagement. Researchers acting under this policy are trying to help.</li>
     </ul>
+
+    <h2>Contact</h2>
+    <p>Reports and replies go to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. The PGP key and fingerprint are on the <a href="/contact/">contact page</a>.</p>
   </article>
 </Base>

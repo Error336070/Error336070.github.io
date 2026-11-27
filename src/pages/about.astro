@@ -3,21 +3,29 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../site.config';
 ---
 
-<Base title="About">
+<Base title="About" description={`About ${SITE.name}: research across software security, quantitative finance and machine learning.`}>
   <article class="prose">
-    <h1>About</h1>
-    <p class="lede">
-      I'm {SITE.name}, also known online as <code>{SITE.handle}</code>. I do security research with a focus on
-      reverse engineering and software protection.
-    </p>
+    <header class="page-head">
+      <p class="eyebrow">About</p>
+      <h1>{SITE.name}</h1>
+      <p class="lede">I'm a researcher working across software security, quantitative finance and machine learning. Online I go by <code>{SITE.handle}</code>.</p>
+    </header>
 
-    <h2>What I work on</h2>
+    <h2>Security</h2>
     <ul>
-      <li><strong>Reverse engineering &amp; software protection:</strong> .NET internals, obfuscators and code virtualizers, anti-tamper and licensing schemes.</li>
+      <li><strong>Reverse engineering and software protection:</strong> .NET internals, obfuscators and code virtualizers, anti-tamper and licensing schemes.</li>
       <li><strong>Offensive security:</strong> authorized penetration testing, web application security and Windows internals.</li>
-      <li><strong>Malware analysis &amp; incident response.</strong></li>
+      <li><strong>Malware analysis and incident response.</strong></li>
+    </ul>
+    <p>Flaws I find in third-party products are reported to the vendor first. Published results are on the <a href="/advisories/">advisories</a> page.</p>
+
+    <h2>Quantitative finance</h2>
+    <p>Systematic trading research: strategy design, backtesting and evaluation.</p>
+
+    <h2>Machine learning and AI</h2>
+    <ul>
+      <li><strong>Machine learning projects</strong>, including models for the quantitative work above.</li>
       <li><strong>AI-assisted security research:</strong> agent-driven analysis pipelines with verifiable, provenance-checked output.</li>
-      <li><strong>Quantitative finance &amp; ML:</strong> systematic trading research and machine learning projects.</li>
     </ul>
 
     <h2>How I work</h2>
@@ -28,9 +36,6 @@ import { SITE } from '../site.config';
     </ul>
 
     <h2>Work with me</h2>
-    <p>
-      I take on authorized protection assessments and security audits. Reach out via the
-      <a href="/contact/">contact page</a>.
-    </p>
+    <p>I take on authorized protection assessments and security audits. The <a href="/services/">services page</a> explains what I offer and how an engagement runs. For everything else, use the <a href="/contact/">contact page</a>.</p>
   </article>
 </Base>

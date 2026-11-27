@@ -1,0 +1,11 @@
+---
+import { FIELDS, type FieldId } from '../site.config';
+
+interface Props {
+  field: FieldId;
+}
+const { field } = Astro.props;
+const f = FIELDS.find((x) => x.id === field)!;
+---
+
+<a class={`field field-${f.id}`} href={`/research/field/${f.id}/`}>{f.label}</a>

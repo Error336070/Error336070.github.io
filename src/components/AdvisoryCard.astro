@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import SeverityBadge from './SeverityBadge.astro';
+import StatusBadge from './StatusBadge.astro';
+import { fmtDate, isoDate } from '../lib/content';
+
+interface Props {
+  entry: CollectionEntry<'advisories'>;
+  /** Heading level of the title, so the page outline stays in order. */
+  level?: 2 | 3;
+}
+const { entry, level = 3 } = Astro.props;
+const d = entry.data;
+const H = `h${level}` as 'h2' | 'h3';
+---
+
+<article class="adv-card">
+  <p class="adv-card-top">
+    <span class="adv-id">{d.advisoryId}</span>
+    <time datetime={isoDate(d.published)}>{fmtDate(d.published)}</time>
+  </p>
+  <H class="card-title"><a href={`/advisories/${entry.id}/`}>{d.title}</a></H>
+  <p class="adv-card-vendor">{d.vendor} · {d.product}</p>
+  <p class="card-summary">{d.summary}</p>
+  <p class="adv-card-keys">
+    <SeverityBadge severity={d.severity} />
+    <StatusBadge status={d.status} />
+    {d.cve.map((c) => <span class="ref">{c}</span>)}
+  </p>
+</article>
