@@ -31,14 +31,15 @@ export const FIELDS = [
     id: 'quant',
     label: 'Quant',
     title: 'Quantitative finance',
-    blurb: 'Systematic trading research: how strategies are designed, tested and measured.',
+    blurb:
+      'Mathematical and statistical research on markets: modelling, systematic strategy design, and validation on data the model has never seen.',
   },
   {
     id: 'ml',
     label: 'ML',
     title: 'Machine learning and AI',
     blurb:
-      'Machine learning projects, and agent-driven analysis pipelines with verifiable, provenance-checked output.',
+      'Machine learning research, and agent-driven analysis pipelines with verifiable, provenance-checked output.',
   },
 ] as const;
 

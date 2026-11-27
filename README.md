@@ -15,4 +15,4 @@ Please don't open a GitHub issue for security reports. See the [contact page](ht
 
 ## License
 
-Site code is available under the MIT License. Advisories, write-ups and other written content © Ata Kemal Tur, all rights reserved.
+Site code is available under the MIT License, see [`LICENSE`](LICENSE). It does not cover the written content: advisories, write-ups and page text are © Ata Kemal Tur, all rights reserved. The fonts in `public/fonts` are under the SIL Open Font License; their licence files are in that folder.
