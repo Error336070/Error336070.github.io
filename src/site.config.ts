@@ -5,7 +5,7 @@ export const SITE = {
   handle: 'Error_33_6070',
   tagline: 'Security, quantitative and ML research.',
   intro:
-    'I reverse engineer software protection and licensing schemes, run authorized security assessments, and publish research across security, quantitative finance and machine learning.',
+    'I run authorized security assessments of software protection, anti-tamper and licensing mechanisms, conduct reverse-engineering and vulnerability research, and publish work across security, quantitative finance and machine learning.',
   description:
     'Research by Ata Kemal Tur across software security, quantitative finance and machine learning: advisories, write-ups and coordinated vulnerability disclosure.',
 
@@ -27,7 +27,7 @@ export const FIELDS = [
     label: 'Security',
     title: 'Security',
     blurb:
-      'Reverse engineering, software protection and licensing, anti-tamper, and authorized penetration testing. Flaws in third-party products go to the vendor through coordinated disclosure.',
+      'Authorized assessments of software protection, licensing and anti-tamper mechanisms, reverse-engineering and vulnerability research, and scoped penetration testing. Security vulnerabilities in third-party products are handled under my coordinated disclosure policy, with client approval where encountered during an engagement.',
   },
   {
     id: 'quant',

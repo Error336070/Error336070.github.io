@@ -49,7 +49,7 @@ const fieldLink = { security: 'Security research', quant: 'Quant research', ml: 
       <a class="arrow-link" href="/advisories/">All advisories</a>
     </div>
     {advisories.length === 0 ? (
-      <p class="empty">No public advisories yet. An advisory appears here after the vendor has shipped a fix or the disclosure window has closed.</p>
+      <p class="empty">No public advisories yet. An advisory appears here after the vendor has shipped a fix or after coordinated disclosure concludes.</p>
     ) : (
       <div class="card-list">
         {advisories.map((entry) => <AdvisoryCard entry={entry} />)}
@@ -74,7 +74,7 @@ const fieldLink = { security: 'Security research', quant: 'Quant research', ml: 
   <section class="section cta" aria-labelledby="work">
     <div class="cta-text">
       <h2 id="work"><span class="section-index" aria-hidden="true">04</span>Work with me</h2>
-      <p>I take on software protection and licensing assessments, anti-tamper reviews and authorized penetration tests. Every engagement starts with a written scope and ends with a report you can act on.</p>
+      <p>I run authorized software protection and licensing assessments, anti-tamper reviews and penetration tests. Every engagement starts with a signed SOW, written scope and Rules of Engagement, and ends with a report you can act on.</p>
     </div>
     <p class="cta-actions">
       <a class="btn" href="/services/">Services</a>

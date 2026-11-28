@@ -14,7 +14,7 @@ const advisories = await getAdvisories();
   </header>
 
   {advisories.length === 0 ? (
-    <p class="empty">No public advisories yet. An advisory appears here after the vendor has shipped a fix or the disclosure window has closed.</p>
+    <p class="empty">No public advisories yet. An advisory appears here after the vendor has shipped a fix or after coordinated disclosure concludes.</p>
   ) : (
     <div class="card-list">
       {advisories.map((entry) => <AdvisoryCard entry={entry} level={2} />)}

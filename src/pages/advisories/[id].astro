@@ -35,11 +35,11 @@ const days = daysBetween(d.reported, d.published);
       <div><dt>Vendor</dt><dd>{d.vendor}</dd></div>
       <div><dt>Product</dt><dd>{d.product}</dd></div>
       <div><dt>Affected</dt><dd>{d.affected}</dd></div>
-      <div><dt>Fixed in</dt><dd>{d.fixed ?? <span class="muted">Not fixed</span>}</dd></div>
+      <div><dt>Fixed in</dt><dd>{d.fixed ?? <span class="muted">None known at publication</span>}</dd></div>
       <div><dt>CVE</dt><dd>{d.cve.length ? d.cve.map((c) => <a class="ref" href={cveLink(c)}>{c}</a>) : <span class="muted">None assigned</span>}</dd></div>
       <div><dt>CWE</dt><dd>{d.cwe.length ? d.cwe.map((c) => <a class="ref" href={cweLink(c)}>{c}</a>) : <span class="muted">None assigned</span>}</dd></div>
       {d.coordinator && <div><dt>Coordinator</dt><dd>{d.coordinator}{d.caseNumber && <span class="ref">{d.caseNumber}</span>}</dd></div>}
-      <div><dt>Vendor acknowledged</dt><dd>{d.vendorAcknowledged ? 'Yes' : 'No'}</dd></div>
+      <div><dt>Vendor acknowledgment</dt><dd>{d.vendorAcknowledged ? 'Acknowledged' : 'No acknowledgment recorded'}</dd></div>
       <div><dt>Credit</dt><dd>{SITE.name} ({SITE.handle})</dd></div>
     </dl>
 

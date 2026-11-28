@@ -30,16 +30,20 @@ What an attacker gains. Be precise and avoid hype.
 
 ## Affected versions
 
-Which versions were tested and which are believed affected.
+Which versions were directly tested. Separate verified versions from any versions only suspected to be affected.
 
 ## Technical details
 
 Describe the weakness at a level that helps defenders understand and verify the fix.
-No working exploit code, no client-identifying data, no vectors from client samples.
+No working exploit code, no weaponizable PoCs, no circumvention tools, no proprietary vendor code or keys, and no client-identifying data or artifacts.
 
 ## Remediation
 
 What users and vendors should do: upgrade to X, or mitigate with Y.
+
+## Vendor statement
+
+Include a vendor statement only if cleared for public release and consistent with the publication rules above; otherwise delete this section.
 
 ## Timeline
 
