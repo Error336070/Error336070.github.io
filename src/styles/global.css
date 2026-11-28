@@ -311,11 +311,11 @@ a.ref { color: var(--link); }
 .span-gap::after { grid-column: 3; grid-row: 1; }
 
 /* ---------- Policy timeline at a glance ---------- */
-.glance { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; list-style: none; margin: 0 0 var(--s-7); padding: 0; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; max-width: none; }
-.glance li { display: grid; gap: var(--s-1); margin: 0; padding: var(--s-4) var(--s-5); background: var(--bg-raised); }
+.prose .glance { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; list-style: none; margin: 0 0 var(--s-7); padding: 0; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; max-width: none; }
+.prose .glance > li { display: grid; gap: var(--s-1); margin: 0; padding: var(--s-4) var(--s-5); background: var(--bg-raised); }
 .glance-day { font-family: var(--font-mono); font-size: var(--t-label); font-weight: 500; color: var(--accent); }
-.glance-what { color: var(--text-strong); }
-@media (max-width: 600px) { .glance { grid-template-columns: 1fr; } }
+.glance-what { color: var(--text-strong); overflow-wrap: anywhere; }
+@media (max-width: 600px) { .prose .glance { grid-template-columns: 1fr; } }
 
 /* ---------- Research filter ---------- */
 .filter { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-6); }
