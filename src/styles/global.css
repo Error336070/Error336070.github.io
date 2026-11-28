@@ -425,6 +425,7 @@ h3 { font-weight: 600; letter-spacing: -0.015em; }
 
 .section-head { border-top: 1px solid var(--line-strong); padding-top: var(--s-4); }
 .page-head { border-bottom: 1px solid var(--line); padding-bottom: var(--s-6); }
+.page-updated { margin: var(--s-4) 0 0; font-family: var(--font-mono); font-size: var(--t-label); color: var(--muted); }
 
 .adv-card { border-left: 2px solid var(--line-strong); }
 .adv-card:has(.sev-critical) { border-left-color: var(--crit); }
