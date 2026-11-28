@@ -41,7 +41,7 @@ export const FIELDS = [
     label: 'ML',
     title: 'Machine learning and AI',
     blurb:
-      'Machine learning research, and agent-driven analysis pipelines with verifiable, provenance-checked output.',
+      'Custom model architectures for quantitative finance, custom harness development for AI computer use, and performance-focused tooling and optimization.',
   },
 ] as const;
 
