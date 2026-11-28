@@ -16,6 +16,8 @@ export const SITE = {
 
   disclosureWindowDays: 90,
   acknowledgmentDays: 14,
+  // Shown as "Last updated" on the disclosure policy page. Bump it whenever the policy text changes.
+  policyUpdated: '2026-11-28',
 };
 
 // Research fields. The ids are used in research frontmatter (`field:`) and in URLs (/research/field/<id>/).
