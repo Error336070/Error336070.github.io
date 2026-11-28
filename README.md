@@ -1,6 +1,6 @@
 # atakemaltur.com
 
-Source for [atakemaltur.com](https://atakemaltur.com), the site of Ata Kemal Tur (Error_33_6070): security advisories, research write-ups across security, quantitative finance and machine learning, and a contact for coordinated disclosure.
+Source for [atakemaltur.com](https://atakemaltur.com): my site for security advisories, research write-ups across security, quantitative finance and machine learning, and a contact for coordinated disclosure.
 
 ## Reporting a security issue or inquiry
 
