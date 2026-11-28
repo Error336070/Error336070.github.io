@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site.config';
+---
+
+<Base title="Legal and privacy" description="Disclaimers, copyright, trademarks and privacy notice for atakemaltur.com.">
+  <article class="prose">
+    <header class="page-head">
+      <p class="eyebrow">Legal</p>
+      <h1>Legal and privacy</h1>
+      <p class="lede">Disclaimers, intellectual property and how this site handles data.</p>
+    </header>
+
+    <h2>Informational use and no warranty</h2>
+    <p>Advisories, research write-ups and technical notes on this site are published for defensive, educational and informational purposes. Everything is provided as-is, without warranty of completeness, accuracy or fitness for a particular purpose.</p>
+
+    <h2>Not financial or legal advice</h2>
+    <p>Nothing on this site, including quantitative finance and systematic trading research, constitutes investment, financial, legal or professional advice.</p>
+
+    <h2>Client engagements</h2>
+    <p>Service descriptions on this site are informational and do not form an offer or binding contract. Paid assessments are governed solely by signed written agreements, including a Statement of Work, Rules of Engagement and any NDA.</p>
+
+    <h2>Copyright and trademarks</h2>
+    <p>Written content, advisories and research on this site are © {new Date().getFullYear()} {SITE.name}, all rights reserved. The site's source code is licensed under the MIT License in the public repository, and self-hosted fonts remain under the SIL Open Font License.</p>
+    <p>Third-party company and product names mentioned on this site are trademarks of their respective owners and are used solely for identification. No affiliation or endorsement is implied.</p>
+
+    <h2>Privacy</h2>
+    <p>This site is statically hosted on GitHub Pages. It sets no cookies and uses no analytics or third-party trackers. If you toggle the color theme, that preference is stored locally in your browser's <code>localStorage</code> and never leaves your device.</p>
+    <p>Emails sent to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> are used solely to handle vulnerability coordination, security reports or engagement inquiries.</p>
+  </article>
+</Base>

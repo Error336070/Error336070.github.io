@@ -18,8 +18,8 @@ const updated = new Date(SITE.policyUpdated);
 
     <ol class="glance" aria-label="The default timeline">
       <li><span class="glance-day">Day 0</span><span class="glance-what">Private report to the vendor</span></li>
-      <li><span class="glance-day">Day {ack}</span><span class="glance-what">Acknowledgment due</span></li>
-      <li><span class="glance-day">Day {days}</span><span class="glance-what">Default embargo ends</span></li>
+      <li><span class="glance-day">Day {ack}</span><span class="glance-what">Acknowledgment requested</span></li>
+      <li><span class="glance-day">Day {days}</span><span class="glance-what">Default embargo ends (extendable)</span></li>
     </ol>
 
     <h2>Process</h2>
@@ -27,20 +27,20 @@ const updated = new Date(SITE.policyUpdated);
       <li><strong>Private report.</strong> I contact the vendor through their security contact (or a general contact if none exists) with a clear description of the issue and its impact.</li>
       <li><strong>Acknowledgment.</strong> I ask for an acknowledgment within {ack} days of the initial report. If I don't hear back by then, I try other contacts and may ask a coordinator for help (see below).</li>
       <li><strong>Fix window.</strong> The default embargo is <strong>{days} days</strong> from the initial report. If the vendor is actively working on a fix and keeps me updated, I'm happy to extend it. If I see evidence that the issue is being actively exploited, I may shorten the window so users can protect themselves sooner, and I'll coordinate the new date with the vendor where possible.</li>
-      <li><strong>Publication.</strong> After a fix ships or the window closes, I may publish an advisory. I try to tell the vendor the planned publication date in advance. The advisory describes the issue and its impact at a level that helps defenders.</li>
+      <li><strong>Publication.</strong> After a fix ships or the window closes, I may publish an advisory. I try to tell the vendor the planned publication date in advance. For unfixed issues, I weigh user and ecosystem risk and limit public details to high-level risk and mitigation guidance. Public advisories describe the issue and its impact at a level that helps defenders, and omit weaponizable proof-of-concept code, circumvention tools and proprietary vendor material.</li>
     </ol>
-    <p>Some flaws in third-party products come to light during authorized client engagements. I report those with the client's approval, and I keep the client's identity out of it: the vendor gets the technical details of the issue, but not license details, customer-specific builds, or anything else that identifies the client. I won't identify the client, even on request.</p>
+    <p>Some security vulnerabilities in third-party products come to light incidentally during authorized client engagements. I report those only with the client's written approval, sharing technical details of the vulnerability without client-identifying information, client artifacts or engagement context. I won't identify a client, even on request.</p>
 
     <h2>Coordinators</h2>
     <p>If a vendor doesn't respond or coordination breaks down, I may ask a third-party coordinator such as <a href="https://www.kb.cert.org/vuls/report/">CERT/CC</a> for help. If I need a CVE ID, I use the <a href="https://www.cve.org/PartnerInformation/ListofPartners">CVE Program's directory</a> to find the CVE Numbering Authority (CNA) whose scope covers the vulnerability, which is often the vendor itself. If a vendor responds to a report with legal threats, I'll ask CERT/CC or another neutral coordinator to take over coordination.</p>
 
     <h2>What I don't do</h2>
     <ul>
-      <li>Test systems or products outside an authorized scope.</li>
-      <li>Publish working exploits for issues that haven't been fixed.</li>
+      <li>Test live or remote systems without written authorization. Independent software research is carried out in good faith on lawfully obtained software in isolated local test environments, without accessing non-public accounts, vendor infrastructure or user data.</li>
+      <li>Publish working exploits, weaponizable proof-of-concept code or circumvention tools in public advisories.</li>
       <li>Share client data, or findings about a client's own systems, with anyone but the client.</li>
     </ul>
-    <p>I don't charge vendors for vulnerability reports, and I never ask for payment to keep a finding private. My paid work is security audits for clients, agreed in advance.</p>
+    <p>I don't charge vendors for vulnerability reports, I never ask for payment as a condition of reporting, delaying or withholding disclosure, and I do not solicit paid consulting in connection with a report. Coordinated disclosure is kept separate from paid client engagements.</p>
 
     <h2>What I ask from vendors</h2>
     <ul>
